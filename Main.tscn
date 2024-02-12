@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://jdkcriorlkgj"]
+
+[ext_resource type="PackedScene" uid="uid://bdwmserhqai5h" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_hand_low.tscn" id="1_cg2k3"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_iapmj"]
+[ext_resource type="PackedScene" uid="uid://btf05hjpw6k05" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_hand_low.tscn" id="2_0eayx"]
+
+[sub_resource type="Environment" id="Environment_ascb3"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StartXR" parent="." instance=ExtResource("1_iapmj")]
+enable_passthrough = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+current = true
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+environment = SubResource("Environment_ascb3")
+
+[node name="XRControllerLeftHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="LeftPhysicsHand" parent="XROrigin3D/XRControllerLeftHand" instance=ExtResource("1_cg2k3")]
+
+[node name="XRControllerRightHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="RightPhysicsHand" parent="XROrigin3D/XRControllerRightHand" instance=ExtResource("2_0eayx")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0311805, -0.860075, 0.509214, -0.0525662, 0.510168, 0.858467, -0.998131, -5.5984e-09, -0.0611182, 1.04407, 5.14962, 0)
+sky_mode = 1
